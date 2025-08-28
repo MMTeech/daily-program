@@ -1,582 +1,473 @@
-
 <!DOCTYPE html>
-<html lang="fa">
-
+<html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>برنامه‌های ماهانه</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shabnam-font/5.0.1/font-face.css"
-    integrity="sha512-C/6xRF4xBZvigSk3rz6ZybiZDou5mo/vsZKQ/5K7b6UfUiQ6AzRYTkh3hXzjPNN2lSzv1wkcb5xHi85abCZdqw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Shabnam', 'Tahoma', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      direction: rtl;
-      line-height: 1.8;
-      color: #333;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-      position: relative;
-    }
-
-    /* Header Styles */
-    header {
-      text-align: center;
-      margin-bottom: 50px;
-      padding: 40px 20px;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 25px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .logo {
-      display: inline-block;
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      animation: pulse 2s infinite;
-      box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
-    }
-
-    .logo i {
-      font-size: 35px;
-      color: white;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      background: linear-gradient(45deg, #667eea, #764ba2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 15px;
-    }
-
-    .subtitle {
-      font-size: 1.1rem;
-      color: #666;
-      max-width: 600px;
-      margin: 0 auto;
-      opacity: 0.8;
-    }
-
-    /* Section Styles */
-    section {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 20px;
-      padding: 40px;
-      margin-bottom: 30px;
-      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    section:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
-    }
-
-    h2 {
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin-bottom: 30px;
-      position: relative;
-      padding-bottom: 15px;
-      color: #2c3e50;
-    }
-
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 60px;
-      height: 4px;
-      background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-      border-radius: 2px;
-    }
-
-    /* Weekly Schedule Styles */
-    .weekly-schedule {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      margin-top: 30px;
-    }
-
-    .day-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
-      border-radius: 18px;
-      padding: 25px;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .day-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
-      border-radius: 0 0 10px 10px;
-    }
-
-    .day-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-    }
-
-    .day-card.thursday::before {
-      background: linear-gradient(90deg, #f39c12, #e67e22);
-    }
-
-    .day-card.friday::before {
-      background: linear-gradient(90deg, #27ae60, #2ecc71);
-    }
-
-    .day-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 2px solid rgba(102, 126, 234, 0.1);
-    }
-
-    .day-header h3 {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: #2c3e50;
-      margin: 0;
-    }
-
-    .day-icon {
-      font-size: 1.8rem;
-      opacity: 0.8;
-    }
-
-    .schedule-items {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .time-slot {
-      padding: 15px;
-      border-radius: 12px;
-      background: rgba(102, 126, 234, 0.08);
-      border-right: 4px solid #667eea;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .time-slot:hover {
-      transform: translateX(-3px);
-      box-shadow: 0 5px 20px rgba(102, 126, 234, 0.15);
-    }
-
-    .time-slot strong {
-      color: #667eea;
-      font-weight: 600;
-    }
-
-    .time-slot.afternoon {
-      background: rgba(255, 107, 107, 0.08);
-      border-right-color: #ff6b6b;
-    }
-
-    .time-slot.afternoon strong {
-      color: #ff6b6b;
-    }
-
-    .time-slot.wordpress {
-      background: rgba(33, 117, 155, 0.08);
-      border-right-color: #21759b;
-    }
-
-    .time-slot.wordpress strong {
-      color: #21759b;
-    }
-
-    .time-slot.project {
-      background: rgba(243, 156, 18, 0.08);
-      border-right-color: #f39c12;
-    }
-
-    .time-slot.project strong {
-      color: #f39c12;
-    }
-
-    .time-slot.evening {
-      background: rgba(155, 89, 182, 0.08);
-      border-right-color: #9b59b6;
-    }
-
-    .time-slot.evening strong {
-      color: #9b59b6;
-    }
-
-    .time-slot.review {
-      background: rgba(241, 196, 15, 0.08);
-      border-right-color: #f1c40f;
-    }
-
-    .time-slot.review strong {
-      color: #f39c12;
-    }
-
-    .time-slot.optional {
-      background: rgba(39, 174, 96, 0.08);
-      border-right-color: #27ae60;
-      opacity: 0.8;
-    }
-
-    .time-slot.optional strong {
-      color: #27ae60;
-    }
-
-    .time-slot.rest {
-      background: rgba(149, 165, 166, 0.08);
-      border-right-color: #95a5a6;
-    }
-
-    .time-slot.rest strong {
-      color: #7f8c8d;
-    }
-
-    /* Weekly Focus Styles */
-    .weekly-focus ol {
-      counter-reset: week-counter;
-      list-style: none;
-    }
-
-    .weekly-focus li {
-      counter-increment: week-counter;
-      position: relative;
-      padding: 25px 25px 25px 80px;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(238, 90, 36, 0.1));
-      border-radius: 15px;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(255, 107, 107, 0.2);
-    }
-
-    .weekly-focus li::before {
-      content: counter(week-counter);
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 45px;
-      height: 45px;
-      background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 1.2rem;
-      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
-    }
-
-    .weekly-focus li:hover {
-      transform: translateX(-10px);
-      box-shadow: 0 15px 40px rgba(255, 107, 107, 0.2);
-    }
-
-    .weekly-focus li strong {
-      color: #ff6b6b;
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-
-    /* Footer Styles */
-    footer {
-      text-align: center;
-      padding: 30px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      margin-top: 40px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    footer p {
-      color: #666;
-      font-size: 0.95rem;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .container {
-        padding: 15px;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      section {
-        padding: 25px 20px;
-      }
-
-      .weekly-schedule {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .day-card {
-        padding: 20px;
-      }
-
-      .day-header h3 {
-        font-size: 1.2rem;
-      }
-
-      .time-slot {
-        padding: 12px;
-      }
-
-      .weekly-focus li {
-        padding: 20px 20px 20px 70px;
-      }
-
-      .weekly-focus li::before {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
-      }
-    }
-
-    /* Floating Animation */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-
-    .container::before {
-      content: '';
-      position: fixed;
-      top: -50%;
-      right: -50%;
-      width: 200%;
-      height: 200%;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="60" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="30" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="60" cy="90" r="1" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
-      animation: float 20s infinite linear;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    /* Success indicators */
-    .monthly-plan li:nth-child(1) { border-right-color: #27ae60; }
-    .monthly-plan li:nth-child(2) { border-right-color: #3498db; }
-    .monthly-plan li:nth-child(3) { border-right-color: #e74c3c; }
-    .monthly-plan li:nth-child(4) { border-right-color: #f39c12; }
-    .monthly-plan li:nth-child(5) { border-right-color: #9b59b6; }
-
-    /* Smooth scroll */
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامه توسعه حرفه‌ای</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'vazir': ['Vazir', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Vazir:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Vazir', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-shadow { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .progress-bar { background: linear-gradient(90deg, #10b981, #3b82f6); }
+    </style>
 </head>
+<body class="bg-gray-50 text-gray-800">
+    
+    <!-- Header -->
+    <div class="gradient-bg text-white py-8 mb-8">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl font-bold text-center mb-4">📚 برنامه توسعه حرفه‌ای</h1>
+            <p class="text-center text-xl opacity-90">مسیر 16 هفته‌ای تبدیل شدن به توسعه‌دهنده حرفه‌ای</p>
+            <div class="flex justify-center mt-6 space-x-8 space-x-reverse">
+                <div class="text-center">
+                    <div class="text-2xl font-bold">16</div>
+                    <div class="text-sm opacity-80">هفته</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold">4</div>
+                    <div class="text-sm opacity-80">تکنولوژی</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold">240</div>
+                    <div class="text-sm opacity-80">ساعت مطالعه</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<body>
-  <div class="container">
-    <header>
-      <div class="logo">
-        <i class="fas fa-calendar-alt"></i>
-      </div>
-      <h1>برنامه‌های آموزشی ماهانه</h1>
-      <p class="subtitle">برنامه‌ریزی آموزشی برای رسیدن به تسلط در بک‌اند، جاوااسکریپت و توسعه قالب وردپرس</p>
-    </header>
-
-    <section class="monthly-plan">
-      <h2>برنامه هفتگی</h2>
-      <div class="weekly-schedule">
-        <div class="day-card">
-          <div class="day-header">
-            <h3>شنبه</h3>
-            <span class="day-icon">📚</span>
-          </div>
-          <div class="schedule-items">
-            <div class="time-slot"><strong>۸:۰۰ - ۹:۳۰:</strong> جاوااسکریپت پیشرفته</div>
-            <div class="time-slot"><strong>۹:۳۰ - ۱۱:۰۰:</strong> PHP & الگوریتم</div>
-            <div class="time-slot afternoon"><strong>۱۳:۳۰ - ۱۴:۳۰:</strong> لاراول</div>
-            <div class="time-slot evening"><strong>۲۱:۰۰ - ۲۲:۰۰:</strong> زبان انگلیسی</div>
-          </div>
+    <div class="container mx-auto px-6">
+        
+        <!-- زمان‌بندی روزانه -->
+        <div class="card-shadow bg-white rounded-xl p-8 mb-8">
+            <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">⏰ زمان‌بندی روزانه</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <div class="bg-blue-50 p-4 rounded-lg text-center border-r-4 border-blue-500">
+                    <div class="text-3xl mb-2">🐘</div>
+                    <div class="font-semibold text-blue-800">PHP</div>
+                    <div class="text-blue-600">75 دقیقه روزانه</div>
+                </div>
+                <div class="bg-yellow-50 p-4 rounded-lg text-center border-r-4 border-yellow-500">
+                    <div class="text-3xl mb-2">⚡</div>
+                    <div class="font-semibold text-yellow-800">JavaScript</div>
+                    <div class="text-yellow-600">75 دقیقه روزانه</div>
+                </div>
+                <div class="bg-red-50 p-4 rounded-lg text-center border-r-4 border-red-500">
+                    <div class="text-3xl mb-2">🏗️</div>
+                    <div class="font-semibold text-red-800">Laravel</div>
+                    <div class="text-red-600">60 دقیقه (4 روز هفته)</div>
+                </div>
+                <div class="bg-indigo-50 p-4 rounded-lg text-center border-r-4 border-indigo-500">
+                    <div class="text-3xl mb-2">🎨</div>
+                    <div class="font-semibold text-indigo-800">WordPress</div>
+                    <div class="text-indigo-600">60 دقیقه (3 روز هفته)</div>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg text-center border-r-4 border-green-500">
+                    <div class="text-3xl mb-2">🇺🇸</div>
+                    <div class="font-semibold text-green-800">انگلیسی</div>
+                    <div class="text-green-600">30 دقیقه روزانه</div>
+                </div>
+            </div>
         </div>
 
-        <div class="day-card">
-          <div class="day-header">
-            <h3>یکشنبه</h3>
-            <span class="day-icon">💻</span>
-          </div>
-          <div class="schedule-items">
-            <div class="time-slot"><strong>۸:۰۰ - ۹:۳۰:</strong> جاوااسکریپت پیشرفته</div>
-            <div class="time-slot"><strong>۹:۳۰ - ۱۱:۰۰:</strong> PHP & الگوریتم</div>
-            <div class="time-slot afternoon wordpress"><strong>۱۳:۳۰ - ۱۴:۳۰:</strong> توسعه قالب وردپرس</div>
-            <div class="time-slot evening"><strong>۲۱:۰۰ - ۲۲:۰۰:</strong> زبان انگلیسی</div>
-          </div>
+        <!-- فازهای آموزش -->
+        <div class="space-y-8">
+            
+            <!-- فاز 1 -->
+            <div class="card-shadow bg-white rounded-xl overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6">
+                    <h3 class="text-2xl font-bold flex items-center">
+                        <span class="bg-white text-blue-500 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">1</span>
+                        فاز اول: تقویت مبانی و آمادگی
+                        <span class="bg-blue-700 text-xs px-2 py-1 rounded-full mr-auto">هفته 1-4</span>
+                    </h3>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="p-4 text-right font-semibold">هفته</th>
+                                <th class="p-4 text-right font-semibold">PHP (75 دقیقه)</th>
+                                <th class="p-4 text-right font-semibold">JavaScript (75 دقیقه)</th>
+                                <th class="p-4 text-right font-semibold">Laravel/WordPress (60 دقیقه)</th>
+                                <th class="p-4 text-right font-semibold">پروژه هفته</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="p-4 font-semibold text-blue-600">1-2</td>
+                                <td class="p-4">
+                                    <div class="space-y-1">
+                                        <div class="font-medium">OOP پیشرفته</div>
+                                        <div class="text-sm text-gray-600">• Abstract Classes, Interfaces<br>• Design Patterns<br>• PSR Standards</div>
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="space-y-1">
+                                        <div class="font-medium">ES6+ Features</div>
+                                        <div class="text-sm text-gray-600">• Arrow Functions<br>• Classes, Modules<br>• DOM پیشرفته</div>
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="space-y-1">
+                                        <div class="font-medium text-red-600">Laravel شروع</div>
+                                        <div class="font-medium text-indigo-600">WordPress بهینه‌سازی</div>
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="bg-green-100 text-green-800 p-2 rounded text-sm">
+                                        Task Management System (PHP OOP)
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="p-4 font-semibold text-blue-600">3-4</td>
+                                <td class="p-4">
+                                    <div class="space-y-1">
+                                        <div class="font-medium">Framework Foundations</div>
+                                        <div class="text-sm text-gray-600">• Error Handling<br>• Testing با PHPUnit<br>• Security & Performance</div>
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="space-y-1">
+                                        <div class="font-medium">AJAX & APIs</div>
+                                        <div class="text-sm text-gray-600">• Fetch API<br>• Storage Management<br>• Design Patterns</div>
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="space-y-1">
+                                        <div class="text-sm text-red-600">• Routing & Controllers<br>• Blade Templates</div>
+                                        <div class="text-sm text-indigo-600">• Custom Post Types<br>• WordPress Hooks</div>
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="bg-yellow-100 text-yellow-800 p-2 rounded text-sm">
+                                        Interactive Dashboard (Vanilla JS)
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- فاز 2 -->
+            <div class="card-shadow bg-white rounded-xl overflow-hidden">
+                <div class="bg-gradient-to-r from-green-500 to-teal-600 text-white p-6">
+                    <h3 class="text-2xl font-bold flex items-center">
+                        <span class="bg-white text-green-500 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">2</span>
+                        فاز دوم: پروژه‌محور و تخصصی‌سازی
+                        <span class="bg-green-700 text-xs px-2 py-1 rounded-full mr-auto">هفته 5-10</span>
+                    </h3>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="p-4 text-right font-semibold">هفته</th>
+                                <th class="p-4 text-right font-semibold">تمرکز اصلی</th>
+                                <th class="p-4 text-right font-semibold">مهارت‌های کلیدی</th>
+                                <th class="p-4 text-right font-semibold">پروژه بزرگ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="p-4 font-semibold text-green-600">5-6</td>
+                                <td class="p-4">
+                                    <div class="font-medium text-red-600">Laravel Deep Dive</div>
+                                    <div class="text-sm text-gray-600">Eloquent ORM, API Development</div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="text-sm">
+                                        • Database Relationships<br>
+                                        • Authentication<br>
+                                        • RESTful APIs<br>
+                                        • Frontend-Backend Integration
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="bg-red-100 text-red-800 p-2 rounded text-sm">
+                                        Blog System با Admin Panel
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="p-4 font-semibold text-green-600">7-8</td>
+                                <td class="p-4">
+                                    <div class="font-medium text-yellow-600">JavaScript Frontend Mastery</div>
+                                    <div class="text-sm text-gray-600">SPA Development</div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="text-sm">
+                                        • Component-based Architecture<br>
+                                        • State Management<br>
+                                        • Modern CSS Integration<br>
+                                        • WordPress Headless
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="bg-yellow-100 text-yellow-800 p-2 rounded text-sm">
+                                        SPA با Vanilla JavaScript
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="p-4 font-semibold text-green-600">9-10</td>
+                                <td class="p-4">
+                                    <div class="font-medium text-purple-600">Full-Stack Integration</div>
+                                    <div class="text-sm text-gray-600">End-to-End Development</div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="text-sm">
+                                        • Laravel API + JS Frontend<br>
+                                        • Database Optimization<br>
+                                        • Caching Strategies<br>
+                                        • Performance Tuning
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="bg-purple-100 text-purple-800 p-2 rounded text-sm font-bold">
+                                        🛒 E-commerce Platform<br>
+                                        (Laravel + JavaScript)
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- فاز 3 -->
+            <div class="card-shadow bg-white rounded-xl overflow-hidden">
+                <div class="bg-gradient-to-r from-orange-500 to-red-600 text-white p-6">
+                    <h3 class="text-2xl font-bold flex items-center">
+                        <span class="bg-white text-orange-500 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">3</span>
+                        فاز سوم: آماده‌سازی برای بازار کار
+                        <span class="bg-orange-700 text-xs px-2 py-1 rounded-full mr-auto">هفته 11-16</span>
+                    </h3>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="p-4 text-right font-semibold">مرحله</th>
+                                <th class="p-4 text-right font-semibold">هفته‌ها</th>
+                                <th class="p-4 text-right font-semibold">فعالیت‌های کلیدی</th>
+                                <th class="p-4 text-right font-semibold">نتایج مورد انتظار</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="p-4">
+                                    <div class="font-semibold text-orange-600">Production-Ready Skills</div>
+                                </td>
+                                <td class="p-4 font-semibold">11-12</td>
+                                <td class="p-4">
+                                    <div class="text-sm">
+                                        • DevOps & Deployment<br>
+                                        • Git Workflow پیشرفته<br>
+                                        • Testing & Quality Assurance<br>
+                                        • Documentation Writing
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="bg-blue-100 text-blue-800 p-2 rounded text-sm">
+                                        تسلط بر ابزارهای توسعه حرفه‌ای
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="p-4">
+                                    <div class="font-semibold text-orange-600">Portfolio Development</div>
+                                </td>
+                                <td class="p-4 font-semibold">13-14</td>
+                                <td class="p-4">
+                                    <div class="text-sm">
+                                        • ساخت 3 پروژه showcase<br>
+                                        • GitHub Profile بهینه‌سازی<br>
+                                        • Technical Blog نوشتن<br>
+                                        • LinkedIn Optimization
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="bg-green-100 text-green-800 p-2 rounded text-sm">
+                                        Portfolio حرفه‌ای آماده
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="p-4">
+                                    <div class="font-semibold text-orange-600">Job Market Preparation</div>
+                                </td>
+                                <td class="p-4 font-semibold">15-16</td>
+                                <td class="p-4">
+                                    <div class="text-sm">
+                                        • Algorithm & Data Structure<br>
+                                        • System Design Basics<br>
+                                        • Mock Interviews<br>
+                                        • US Resume Optimization
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="bg-red-100 text-red-800 p-2 rounded text-sm font-bold">
+                                        🎯 آمادگی کامل مهاجرت
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        <div class="day-card">
-          <div class="day-header">
-            <h3>دوشنبه</h3>
-            <span class="day-icon">🚀</span>
-          </div>
-          <div class="schedule-items">
-            <div class="time-slot"><strong>۸:۰۰ - ۹:۳۰:</strong> جاوااسکریپت پیشرفته</div>
-            <div class="time-slot"><strong>۹:۳۰ - ۱۱:۰۰:</strong> PHP & الگوریتم</div>
-            <div class="time-slot afternoon"><strong>۱۳:۳۰ - ۱۴:۳۰:</strong> لاراول</div>
-            <div class="time-slot evening"><strong>۲۱:۰۰ - ۲۲:۰۰:</strong> زبان انگلیسی</div>
-          </div>
+        <!-- پروژه‌های Portfolio -->
+        <div class="card-shadow bg-white rounded-xl p-8 mt-8">
+            <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">🚀 پروژه‌های کلیدی Portfolio</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="border-2 border-blue-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
+                        <h3 class="font-bold text-blue-800">Task Management System</h3>
+                    </div>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <div>• User Authentication</div>
+                        <div>• Task CRUD Operations</div>
+                        <div>• Team Collaboration</div>
+                        <div>• Email Notifications</div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">PHP OOP</span>
+                    </div>
+                </div>
+
+                <div class="border-2 border-red-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-3 h-3 bg-red-500 rounded-full mr-3"></div>
+                        <h3 class="font-bold text-red-800">E-commerce Platform</h3>
+                    </div>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <div>• Product Catalog</div>
+                        <div>• Shopping Cart</div>
+                        <div>• Payment Integration</div>
+                        <div>• Admin Dashboard</div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Laravel</span>
+                        <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded mr-2">API</span>
+                    </div>
+                </div>
+
+                <div class="border-2 border-indigo-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-3 h-3 bg-indigo-500 rounded-full mr-3"></div>
+                        <h3 class="font-bold text-indigo-800">WordPress Custom Theme</h3>
+                    </div>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <div>• Responsive Design</div>
+                        <div>• Custom Post Types</div>
+                        <div>• WooCommerce Integration</div>
+                        <div>• Performance Optimized</div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded">WordPress</span>
+                    </div>
+                </div>
+
+                <div class="border-2 border-yellow-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-3 h-3 bg-yellow-500 rounded-full mr-3"></div>
+                        <h3 class="font-bold text-yellow-800">JavaScript SPA</h3>
+                    </div>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <div>• Dynamic Routing</div>
+                        <div>• API Integration</div>
+                        <div>• State Management</div>
+                        <div>• Modern UI/UX</div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Vanilla JS</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="day-card">
-          <div class="day-header">
-            <h3>سه‌شنبه</h3>
-            <span class="day-icon">⚡</span>
-          </div>
-          <div class="schedule-items">
-            <div class="time-slot"><strong>۸:۰۰ - ۹:۳۰:</strong> جاوااسکریپت پیشرفته</div>
-            <div class="time-slot"><strong>۹:۳۰ - ۱۱:۰۰:</strong> PHP & الگوریتم</div>
-            <div class="time-slot afternoon wordpress"><strong>۱۳:۳۰ - ۱۴:۳۰:</strong> توسعه قالب وردپرس</div>
-            <div class="time-slot evening"><strong>۲۱:۰۰ - ۲۲:۰۰:</strong> زبان انگلیسی</div>
-          </div>
+        <!-- Progress Tracker -->
+        <div class="card-shadow bg-white rounded-xl p-8 mt-8 mb-8">
+            <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">📈 ردیابی پیشرفت</h2>
+            <div class="space-y-6">
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="font-semibold">هفته 4: پایه‌گذاری</span>
+                        <span class="text-sm text-gray-600">25%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3">
+                        <div class="progress-bar h-3 rounded-full" style="width: 25%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="font-semibold">هفته 8: سطح متوسط</span>
+                        <span class="text-sm text-gray-600">50%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3">
+                        <div class="progress-bar h-3 rounded-full" style="width: 50%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="font-semibold">هفته 12: سطح پیشرفته</span>
+                        <span class="text-sm text-gray-600">75%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3">
+                        <div class="progress-bar h-3 rounded-full" style="width: 75%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="font-semibold">هفته 16: آماده بازار کار</span>
+                        <span class="text-sm text-gray-600">100%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3">
+                        <div class="progress-bar h-3 rounded-full" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="day-card">
-          <div class="day-header">
-            <h3>چهارشنبه</h3>
-            <span class="day-icon">🛠️</span>
-          </div>
-          <div class="schedule-items">
-            <div class="time-slot"><strong>۸:۰۰ - ۹:۳۰:</strong> جاوااسکریپت پیشرفته</div>
-            <div class="time-slot"><strong>۹:۳۰ - ۱۱:۰۰:</strong> PHP & الگوریتم</div>
-            <div class="time-slot afternoon"><strong>۱۳:۳۰ - ۱۴:۳۰:</strong> لاراول</div>
-            <div class="time-slot evening"><strong>۲۱:۰۰ - ۲۲:۰۰:</strong> زبان انگلیسی</div>
-          </div>
+        <!-- Call to Action -->
+        <div class="card-shadow gradient-bg text-white rounded-xl p-8 text-center">
+            <h2 class="text-3xl font-bold mb-4">🎯 شروع از امروز!</h2>
+            <p class="text-xl mb-6 opacity-90">16 هفته تا تحقق رویای مهاجرت و شغل در آمریکا</p>
+            <div class="flex justify-center space-x-4 space-x-reverse">
+                <div class="bg-white bg-opacity-20 backdrop-blur rounded-lg p-4">
+                    <div class="text-2xl font-bold">240</div>
+                    <div class="text-sm">ساعت مطالعه</div>
+                </div>
+                <div class="bg-white bg-opacity-20 backdrop-blur rounded-lg p-4">
+                    <div class="text-2xl font-bold">6</div>
+                    <div class="text-sm">پروژه بزرگ</div>
+                </div>
+                <div class="bg-white bg-opacity-20 backdrop-blur rounded-lg p-4">
+                    <div class="text-2xl font-bold">100</div>
+                    <div class="text-sm">روز تمرکز</div>
+                </div>
+            </div>
         </div>
-
-        <div class="day-card thursday">
-          <div class="day-header">
-            <h3>پنجشنبه</h3>
-            <span class="day-icon">📝</span>
-          </div>
-          <div class="schedule-items">
-            <div class="time-slot"><strong>۸:۰۰ - ۹:۳۰:</strong> جاوااسکریپت پیشرفته</div>
-            <div class="time-slot"><strong>۹:۳۰ - ۱۱:۰۰:</strong> PHP & الگوریتم</div>
-            <div class="time-slot afternoon wordpress"><strong>۱۳:۳۰ - ۱۴:۳۰:</strong> توسعه قالب وردپرس</div>
-            <div class="time-slot evening"><strong>۲۱:۰۰ - ۲۲:۰۰:</strong> زبان انگلیسی</div>
-          </div>
-        </div>
-
-        <div class="day-card friday">
-          <div class="day-header">
-            <h3>جمعه</h3>
-            <span class="day-icon">🎯</span>
-          </div>
-          <div class="schedule-items">
-            <div class="time-slot optional"><strong>اختیاری:</strong> مرور کلی</div>
-            <div class="time-slot optional"><strong>اختیاری:</strong> تماشای فیلم آموزشی</div>
-            <div class="time-slot optional"><strong>اختیاری:</strong> مطالعه آزاد</div>
-            <div class="time-slot rest"><strong>استراحت</strong> و آماده‌سازی برای هفته بعد</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="weekly-focus">
-      <h2>تقسیم‌بندی هفتگی توسعه قالب وردپرس</h2>
-      <ol>
-        <li><strong>هفته اول:</strong> تکمیل صفحات سایت فیلم (آرشیو، جزئیات، درباره ما)</li>
-        <li><strong>هفته دوم:</strong> ریسپانسیو‌سازی و تست نهایی طراحی</li>
-        <li><strong>هفته سوم:</strong> تبدیل قالب به وردپرس با توابع اصلی</li>
-        <li><strong>هفته چهارم:</strong> اضافه‌کردن تنظیمات و آماده‌سازی برای راست‌چین</li>
-      </ol>
-    </section>
-
-    <footer>
-      <p>© ۱۴۰۳ | برنامه‌ریزی آموزشی | تمامی حقوق محفوظ است</p>
-    </footer>
-  </div>
-
-  <script>
-    // Add smooth animations and interactions
-    document.addEventListener('DOMContentLoaded', function() {
-      // Animate sections on scroll
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-          }
-        });
-      });
-
-      // Initially hide sections for animation
-      const sections = document.querySelectorAll('section');
-      sections.forEach((section, index) => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(50px)';
-        section.style.transition = `opacity 0.6s ease ${index * 0.2}s, transform 0.6s ease ${index * 0.2}s`;
-        observer.observe(section);
-      });
-
-      // Add click effects to list items
-      const listItems = document.querySelectorAll('li');
-      listItems.forEach(item => {
-        item.addEventListener('click', function() {
-          this.style.transform = 'scale(0.98)';
-          setTimeout(() => {
-            this.style.transform = '';
-          }, 150);
-        });
-      });
-
-      // Dynamic background gradient
-      let angle = 135;
-      setInterval(() => {
-        angle += 1;
-        document.body.style.background = `linear-gradient(${angle}deg, #667eea 0%, #764ba2 100%)`;
-      }, 100);
-    });
-  </script>
+    </div>
 </body>
-
 </html>
